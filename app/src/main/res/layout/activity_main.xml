@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom = "http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+   <!-- <com.liuchuanzheng.study_zidingyiview.BezierView
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>
+    <com.liuchuanzheng.study_zidingyiview.RemoteControlMenu
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>-->
+    <!--<com.liuchuanzheng.study_zidingyiview.FailingBall
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"/>-->
+   <!-- <com.liuchuanzheng.study_zidingyiview.CustomTitleView
+        android:padding="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:titleText="3712"
+        custom:titleTextColor="#394BB2"
+        custom:titleTextSize="40sp" />-->
+
+</LinearLayout>

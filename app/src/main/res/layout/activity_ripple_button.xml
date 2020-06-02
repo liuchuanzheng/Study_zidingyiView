@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/test_bt"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="13dp"
+        android:background="@drawable/bg_ripple_selector"
+        android:text="关注" />
+
+    <com.liuchuanzheng.study_zidingyiview.ripplebutton.RippleButtonView
+        android:id="@+id/test_rbv"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="13dp"
+        android:background="#FFFFFF"
+        android:text="关注" />
+    <com.liuchuanzheng.study_zidingyiview.ripplebutton.RippleButtonView2
+        android:paddingVertical="10dp"
+        android:gravity="center"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="13dp"
+        android:background="#FFFFFF"
+        android:text="关注" />
+
+</LinearLayout>
