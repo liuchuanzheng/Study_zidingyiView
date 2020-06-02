@@ -1,10 +1,18 @@
 package com.liuchuanzheng.study_zidingyiview.base;
 
 import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
+import com.liuchuanzheng.study_zidingyiview.R;
+import com.liuchuanzheng.study_zidingyiview.floatview2.SystemUtils;
 
 /**
  * @author 刘传政
@@ -15,54 +23,74 @@ import androidx.annotation.Nullable;
  * 注意事项:
  */
 public class TestView extends View {
-    /**
-     * Simple constructor to use when creating a view from code.
-     *
-     * @param context The Context the view is running in, through which it can
-     *                access the current theme, resources, etc.
-     */
     public TestView(Context context) {
         this(context,null);
     }
-
-    /**
-     * Constructor that is called when inflating a view from XML. This is called
-     * when a view is being constructed from an XML file, supplying attributes
-     * that were specified in the XML file. This version uses a default style of
-     * 0, so the only attribute values applied are those in the Context's Theme
-     * and the given AttributeSet.
-     *
-     * <p>
-     * The method onFinishInflate() will be called after all children have been
-     * added.
-     *
-     * @param context The Context the view is running in, through which it can
-     *                access the current theme, resources, etc.
-     * @param attrs   The attributes of the XML tag that is inflating the view.
-     * @see #View(Context, AttributeSet, int)
-     */
     public TestView(Context context, @Nullable AttributeSet attrs) {
         this(context, attrs,0);
     }
-
-    /**
-     * Perform inflation from XML and apply a class-specific base style from a
-     * theme attribute. This constructor of View allows subclasses to use their
-     * own base style when they are inflating. For example, a Button class's
-     * constructor would call this version of the super class constructor and
-     * supply <code>R.attr.buttonStyle</code> for <var>defStyleAttr</var>; this
-     * allows the theme's button style to modify all of the base view attributes
-     * (in particular its background) as well as the Button class's attributes.
-     *
-     * @param context      The Context the view is running in, through which it can
-     *                     access the current theme, resources, etc.
-     * @param attrs        The attributes of the XML tag that is inflating the view.
-     * @param defStyleAttr An attribute in the current theme that contains a
-     *                     reference to a style resource that supplies default values for
-     *                     the view. Can be 0 to not look for defaults.
-     * @see #View(Context, AttributeSet)
-     */
     public TestView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        //解析自定义属性
+        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TestView);
+        String titleText = typedArray.getString(R.styleable.TestView_titleText);
+        int titleTextColor = typedArray.getColor(R.styleable.TestView_titleTextColor, Color.BLACK);
+        float titleTextSize = typedArray.getDimension(R.styleable.TestView_titleTextSize, 0);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        //传递进来的两个参数是父布局和xml配置,综合考虑后给我们的一个建议
+        //一般我们只处理AT_MOST(也就是xml指定了wrap_content).也就是说这种情况Android不知道你的包裹内容到底多大合适
+        //只能给你最大值处理了.
+        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int width ;
+        int height ;
+        if (widthMode == MeasureSpec.EXACTLY) {
+            //既然是确定模式的.我们就照搬使用就好了
+            width = widthSize;
+        }else {
+            //也就是包裹内容情况或UNSPECIFIED(遇不到)
+            //这里默认100px外加左右两边的padding
+            width = (int) (getPaddingLeft() + 100 + getPaddingRight());
+        }
+        if (heightMode == MeasureSpec.EXACTLY) {
+            //既然是确定模式的.我们就照搬使用就好了
+            height = heightSize;
+        }else {
+            //也就是包裹内容情况或UNSPECIFIED(遇不到)
+            //这里默认100px外加上下两边的padding
+            height = (int) (getPaddingTop() + 100 + getPaddingBottom());
+        }
+        //最后调用设置方法.让我们自定义的宽高生效
+        setMeasuredDimension(width, height);
+    }
+    Paint paint = new Paint();
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        //getWidth()和getHeight()是包括了padding的总长.
+        paint.setColor(Color.RED);
+        canvas.drawCircle(getWidth()/2,getHeight()/2,Math.min(getWidth()/2,getHeight()/2),paint);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //对于简单的触摸,无非就是根据手指的触摸变化,改变view的绘制的数据.不停的调用重绘方法
+        //ondraw被回调时,根据新数据重新绘制样子.你看到的就是view随手指改变了.
+        //实际上触摸和view绘制毫无联系,是我们通过逻辑让他俩建立了联系.
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+        }
+        return super.onTouchEvent(event);
     }
 }

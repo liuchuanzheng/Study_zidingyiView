@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
+    android:layout_width="300dp"
+    android:layout_height="500dp"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/btn_scrollto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ScrollTo"/>
+
+    <Button
+        android:id="@+id/btn_scrollby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ScrollBy"/>
+
+</LinearLayout>

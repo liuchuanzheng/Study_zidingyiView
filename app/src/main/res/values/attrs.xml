@@ -8,4 +8,9 @@
         <attr name="titleTextColor" />
         <attr name="titleTextSize" />
     </declare-styleable>
+    <declare-styleable name="TestView">
+        <attr name="titleText" />
+        <attr name="titleTextColor" />
+        <attr name="titleTextSize" />
+    </declare-styleable>
 </resources>
